@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MC BATTLE & HOST STUDIO - Generator MC Opening, Closing & Face-Lock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        stage: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        stage: {
+                            950: '#07080d',
+                            900: '#0e1018',
+                            800: '#161926',
+                            700: '#21263a',
+                            gold: '#f59e0b',
+                            rose: '#e11d48',
+                            cyan: '#06b6d4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0e1018; }
+        ::-webkit-scrollbar-thumb { background: #21263a; border-radius: 9999px; }
+        .glass-panel {
+            background: rgba(14, 16, 24, 0.86);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .mc-glow {
+            box-shadow: 0 0 24px rgba(245, 158, 11, 0.25), 0 0 12px rgba(225, 29, 72, 0.2);
+        }
+        .dialog-card-active {
+            border-color: #f59e0b !important;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(225, 29, 72, 0.08)) !important;
+        }
+    </style>
+</head>
+<body class="bg-stage-950 text-zinc-100 min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-zinc-950">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 via-rose-600 to-purple-600 flex items-center justify-center mc-glow">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-stage font-extrabold text-sm sm:text-lg tracking-wider bg-gradient-to-r from-white via-amber-200 to-rose-300 bg-clip-text text-transparent">
+                            AI MC BATTLE STUDIO
+                        </h1>
+                        <span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-amber-500/15 text-amber-400 border border-amber-500/30">HOST PRO</span>
+                    </div>
+                    <p class="text-[11px] text-zinc-400 hidden sm:block">Generator Host MC Opening/Closing, Face-Lock Wajah, Arena Panggung & Dialog Otomatis</p>
+                </div>
+            </div>
+
+            <button onclick="resetStudio()" class="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 border border-zinc-700 transition">
+                Reset Studio
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- TOP SECTION: 3 KOLOM KONFIGURASI MC -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+            <!-- KOLOM 1: FACE-LOCK & GAYA KOSTUM MC (4 Kolom) -->
+            <div class="lg:col-span-4 glass-panel rounded-2xl p-5 space-y-4 border-t border-cyan-500/30">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-stage font-bold text-cyan-400">1. WAJAH & KOSTUM MC</span>
+                    <span class="px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 text-[10px] font-semibold">Face-Lock</span>
+                </div>
+
+                <!-- Upload Foto Wajah -->
+                <div class="flex items-center gap-3.5 bg-stage-950/90 p-3 rounded-xl border border-zinc-800">
+                    <div id="mc-face-preview" class="w-16 h-20 rounded-lg bg-stage-900 border-2 border-dashed border-cyan-500/50 flex flex-col items-center justify-center overflow-hidden shrink-0">
+                        <svg class="w-6 h-6 text-cyan-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        <span class="text-[9px] text-zinc-400 mt-0.5 text-center">Foto Anda</span>
+                    </div>
+                    <div class="flex-1 space-y-1.5">
+                        <p class="text-xs font-semibold text-white">Gunakan Wajah Anda Jadi MC</p>
+                        <p id="mc-face-status" class="text-[11px] text-zinc-400 leading-tight">Upload foto wajah agar MC di foto & video memakai wajah bosq.</p>
+                        <div class="flex items-center gap-2 pt-0.5">
+                            <input type="file" id="mc-face-input" accept="image/*" class="hidden" onchange="handleMcFaceUpload(event)">
+                            <button onclick="document.getElementById('mc-face-input').click()" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-bold text-[11px] transition">
+                                + Upload Foto
+                            </button>
+                            <button id="mc-face-clear" onclick="clearMcFace()" class="hidden px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-rose-600 text-zinc-300 hover:text-white text-[11px] transition">
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pilihan Kostum / Karakter MC -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs text-zinc-400">Pilih Gaya & Kostum MC</label>
+                    <select id="mc-costume-select" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-500">
+                        <option value="shinobi_tactical" selected>1. MC Pria Shinobi Tactical Vest & Ikat Kepala (Gaya Video 1)</option>
+                        <option value="glamour_woman">2. MC Wanita Gaun Hitam Elegan Glamour (Gaya Video 2)</option>
+                        <option value="muscle_tank">3. MC Pria Berotot Rompi Taktis & Bandana (Gaya Video 3)</option>
+                        <option value="batik_tactical">4. MC Pria Kemeja Batik Taktis & Ikat Kepala Nusantara (Gaya Video 4)</option>
+                        <option value="esports_caster">5. MC Shoutcaster Esports Jaket Neon Futuristik</option>
+                        <option value="boxing_announcer">6. MC Ring Announcer Jas Tuksedo Mewah Klasik</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs text-zinc-400">Rasio Visual & Video</label>
+                    <select id="mc-aspect-ratio" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-500">
+                        <option value="9:16" selected>9:16 (Vertikal - Reels / Shorts / TikTok)</option>
+                        <option value="16:9">16:9 (Horizontal - YouTube)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- KOLOM 2: PILIHAN ARENA / PANGGUNG LATAR (4 Kolom) -->
+            <div class="lg:col-span-4 glass-panel rounded-2xl p-5 space-y-4 border-t border-amber-500/30">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-stage font-bold text-amber-400">2. ARENA & PANGGUNG MC</span>
+                    <button onclick="randomizeMcArena()" class="px-2.5 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/30 text-amber-300 text-[10px] font-bold border border-amber-500/30 transition">
+                        🎲 Acak Arena
+                    </button>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs text-zinc-400">Pilih Lokasi / Latar Belakang MC</label>
+                    <select id="mc-arena-select" onchange="updateArenaPreviewText()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-500">
+                        <option value="0" selected>1. Galeri Lukisan Tinta Manga Hitam-Putih Raksasa (Gaya Video 1)</option>
+                        <option value="1">2. Stadion Turnamen Raksasa Penuh Layar LED Roster Anime (Gaya Video 2)</option>
+                        <option value="2">3. Ruangan Galeri Koleksi Kartu Ninja & Monitor Gaming (Gaya Video 3 & 4)</option>
+                        <option value="3">4. Arena Ujian Chunin Konoha dengan Penonton Ribuan Shinobi</option>
+                        <option value="4">5. Panggung Esports Cyberpunk Neon Biru-Merah & Sorot Lampu</option>
+                        <option value="5">6. Lembah Akhir (Air Terjun Megah & Patung Raksasa Berk kabut)</option>
+                        <option value="6">7. Ring Pertarungan Oktagon Bawah Tanah dengan Efek Percikan Api</option>
+                        <option value="7">8. Studio Podcast / Broadcast Modern Minimalis dengan LED Strip</option>
+                        <option value="8">9. Kuil Kuno Jepang Malam Hari dengan Lentera Menyala & Bulan Purnama</option>
+                        <option value="9">10. Koloseum Batu Megah Terbuka di Bawah Langit Senja Membara</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs text-zinc-400">Deskripsi Detail Arena (Bisa Diedit)</label>
+                    <textarea id="mc-arena-desc" rows="4" class="w-full bg-stage-950 border border-zinc-700 rounded-xl p-3 text-xs text-zinc-200 leading-relaxed focus:outline-none focus:border-amber-500">A massive illuminated wall mural behind the MC displaying detailed black-and-white Japanese sumi-e ink manga artwork of dramatic anime warriors and swirling ink clouds, modern gallery ceiling spotlights</textarea>
+                </div>
+            </div>
+
+            <!-- KOLOM 3: SETTING PERTARUNGAN & SEGMEN MC (4 Kolom) -->
+            <div class="lg:col-span-4 glass-panel rounded-2xl p-5 space-y-4 border-t border-rose-500/30">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-stage font-bold text-rose-400">3. DATA BATTLE & SEGMEN</span>
+                    <span class="px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 text-[10px] font-semibold">Auto Dialog</span>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs text-zinc-400">Pilih Segmen Video MC</label>
+                    <select id="mc-segment-select" onchange="generateDialogPresets()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
+                        <option value="opening" selected>OPENING (Pembuka Battle & Sebut Nama Petarung)</option>
+                        <option value="hype">HYPE / TENGAH (Komentar Panas Saat Pertarungan)</option>
+                        <option value="closing">CLOSING (Penutup, Tanya Penonton & Ajak Follow/Share)</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block text-[11px] text-zinc-400 mb-1">Petarung 1 (Kiri)</label>
+                        <input type="text" id="fighter-1" value="Choji Akimichi" oninput="generateDialogPresets()" placeholder="Nama Petarung 1" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-zinc-400 mb-1">Petarung 2 (Kanan)</label>
+                        <input type="text" id="fighter-2" value="Shikamaru Nara" oninput="generateDialogPresets()" placeholder="Nama Petarung 2" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                </div>
+
+                <div class="pt-1 flex flex-col gap-2">
+                    <button onclick="generateAiDialogs()" id="btn-ai-dialogs" class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-amber-300 font-bold text-xs transition flex items-center justify-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        <span>Acak / Buat Variasi Dialog Baru (AI)</span>
+                    </button>
+                    <button onclick="generateMcImageAndPrompt()" id="btn-generate-all" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 via-rose-600 to-purple-600 hover:from-amber-400 hover:to-purple-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-rose-600/25 transition flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span>GENERATE FOTO MC & PROMPT VIDEO</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE SECTION: PILIHAN DIALOG OTOMATIS TINGGAL KLIK -->
+        <section class="glass-panel rounded-2xl p-5 space-y-3 border border-zinc-800">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <h2 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                        <span class="w-2 h-5 rounded-full bg-amber-400"></span>
+                        <span>Pilih Naskah Dialog MC Otomatis (Tinggal Klik Pilih)</span>
+                    </h2>
+                    <p class="text-xs text-zinc-400">Klik salah satu kotak dialog di bawah ini untuk langsung memasukkannya ke dalam Prompt Video MC.</p>
+                </div>
+                <span id="active-segment-badge" class="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-300 text-xs font-bold border border-amber-500/30">
+                    Segmen: OPENING
+                </span>
+            </div>
+
+            <div id="dialog-options-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <!-- Dialog cards injected automatically -->
+            </div>
+
+            <!-- Custom / Selected Dialog Editor -->
+            <div class="pt-2">
+                <label class="block text-xs font-semibold text-zinc-400 mb-1">Naskah Dialog MC Terpilih (Bisa Diedit Langsung):</label>
+                <textarea id="selected-dialog-input" oninput="syncPromptWithDialog()" rows="2" class="w-full bg-stage-950 border border-amber-500/40 rounded-xl p-3 text-sm text-white font-medium focus:outline-none focus:border-amber-400"></textarea>
+            </div>
+        </section>
+
+        <!-- BOTTOM SECTION: HASIL GAMBAR MC & PROMPT VIDEO SIAP COPY -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            
+            <!-- Hasil Gambar Karakter MC (5 Kolom) -->
+            <div class="lg:col-span-5 glass-panel rounded-2xl p-5 space-y-3 border border-zinc-800">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Visual Referensi MC (Siap Image-to-Video)</span>
+                    <button onclick="downloadMcImage()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <span>Unduh Foto MC</span>
+                    </button>
+                </div>
+                <div id="mc-image-box" class="aspect-[9/16] max-h-[540px] mx-auto rounded-xl bg-stage-950 border border-zinc-800 overflow-hidden flex items-center justify-center p-4 text-center">
+                    <div class="space-y-2">
+                        <p class="text-xs text-zinc-400">Klik tombol <span class="text-amber-400 font-bold">"GENERATE FOTO MC & PROMPT VIDEO"</span> untuk merender host MC di arena pilihan Anda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt Video AI Siap Salin (7 Kolom) -->
+            <div class="lg:col-span-7 glass-panel rounded-2xl p-5 flex flex-col justify-between space-y-4 border border-zinc-800">
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Prompt Video MC Siap Copy (Dengan Lip-Sync Bahasa Indonesia)</span>
+                            <p class="text-[11px] text-zinc-400 mt-0.5">Gunakan gambar MC di samping sebagai referensi di AI Video Generator (Kling / Veo / Hailuo / Runway).</p>
+                        </div>
+                        <span id="prompt-char-count" class="text-[11px] font-mono px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400">0/850 kar</span>
+                    </div>
+
+                    <textarea id="final-video-prompt" oninput="updateCharBadge()" rows="11" class="w-full bg-stage-950 border border-zinc-800 rounded-xl p-4 text-xs sm:text-sm text-zinc-200 leading-relaxed focus:outline-none focus:border-cyan-500"></textarea>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-zinc-800">
+                    <span class="text-xs text-zinc-400">Format: Kamera dinamis + Lip-sync jelas + SFX Mic</span>
+                    <button onclick="copyFinalPrompt()" class="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-cyan-600/20 transition flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span>COPY PROMPT VIDEO MC</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-zinc-800 border border-zinc-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-sm font-medium">
+        <span id="toast-icon" class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        <span id="toast-msg">Berhasil!</span>
+    </div>
+
+    <script>
+        const apiKey = "";
+        let mcFaceBase64 = null;
+        let mcFaceMime = null;
+        let latestMcImageDataUrl = null;
+        let selectedDialogIndex = 0;
+        let currentDialogList = [];
+
+        // ==================== DATA PRESET KOSTUM & ARENA ====================
+        const COSTUME_PRESETS = {
+            shinobi_tactical: {
+                label: "MC Pria Shinobi Tactical Vest",
+                visualEn: "an energetic young Indonesian male MC host wearing a dark grey tactical hoodie, olive-drab military tactical chest rig vest with pouches, black cargo pants, and a shinobi metal headband on his forehead, holding a professional black wireless handheld microphone"
+            },
+            glamour_woman: {
+                label: "MC Wanita Gaun Hitam Elegan",
+                visualEn: "a charismatic glamorous Indonesian female MC host with sleek tied-back hair, wearing an elegant off-shoulder black evening gown with sheer flowing sleeves, holding a sleek metallic handheld stage microphone with a bright confident smile"
+            },
+            muscle_tank: {
+                label: "MC Pria Berotot Rompi Taktis",
+                visualEn: "a muscular athletic Indonesian male MC host wearing a camouflage tactical vest over a white fitted undershirt, patterned ninja bandana headband, tactical cargo pants, holding a silver-grilled handheld microphone with high energy"
+            },
+            batik_tactical: {
+                label: "MC Pria Batik Taktis Nusantara",
+                visualEn: "a friendly young Indonesian male MC host wearing a modern dark patterned Nusantara batik shirt layered under a tan tactical vest, patterned headband, black tactical pants, holding a handheld microphone"
+            },
+            esports_caster: {
+                label: "MC Shoutcaster Esports Neon",
+                visualEn: "a stylish Indonesian esports shoutcaster host wearing a futuristic black-and-cyan LED-trimmed bomber jacket, headset around neck, holding a broadcast microphone"
+            },
+            boxing_announcer: {
+                label: "MC Ring Announcer Tuksedo",
+                visualEn: "a charismatic championship ring announcer wearing a sharp tailored black tuxedo suit with gold lapel pin and bow tie, holding a classic chrome broadcast microphone"
+            }
+        };
+
+        const ARENA_PRESETS = [
+            "A massive illuminated wall mural behind the MC displaying detailed black-and-white Japanese sumi-e ink manga artwork of dramatic anime warriors and swirling ink clouds, modern gallery ceiling spotlights",
+            "A colossal packed esports stadium arena behind the MC with a giant curved LED screen displaying a colorful grid of dozens of anime fighter portraits, dazzling concert stage spotlights and cheering crowd",
+            "An indoor gaming & collector gallery room with warm terracotta walls lined with rows of framed anime character cards and gaming monitors on wooden stands",
+            "The grand Chunin Exam tournament arena in Konoha with massive stone walls, giant wooden gate, and thousands of cheering spectators in the stands under bright daylight",
+            "A futuristic cyberpunk esports stage with glowing neon cyan and crimson light beams, digital hologram scoreboards, and dramatic stage smoke",
+            "The iconic Final Valley canyon with two colossal stone ninja statues facing each other across a thundering misty waterfall",
+            "An underground fight club octagon cage surrounded by dramatic warm spotlights, sparks flying in the air, and atmospheric haze",
+            "A sleek modern broadcast studio with acoustic panels, warm amber and cyan RGB LED light bars, and a glowing 'VS BATTLE' neon sign in the background",
+            "A traditional Japanese temple courtyard at night illuminated by glowing paper lanterns, cherry blossom petals, and a giant full moon",
+            "A massive ancient stone colosseum arena under a dramatic fiery sunset sky with swirling dust and epic cinematic lighting"
+        ];
+
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            document.getElementById('toast-icon').className = `w-2.5 h-2.5 rounded-full ${type === 'error' ? 'bg-rose-500' : 'bg-emerald-400'}`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3200);
+        }
+
+        function updateArenaPreviewText() {
+            const idx = parseInt(document.getElementById('mc-arena-select').value, 10);
+            if (!isNaN(idx) && ARENA_PRESETS[idx]) {
+                document.getElementById('mc-arena-desc').value = ARENA_PRESETS[idx];
+                syncPromptWithDialog();
+            }
+        }
+
+        function randomizeMcArena() {
+            const select = document.getElementById('mc-arena-select');
+            const randomIdx = Math.floor(Math.random() * ARENA_PRESETS.length);
+            select.value = randomIdx.toString();
+            updateArenaPreviewText();
+            showToast(`Arena diganti ke: ${select.options[randomIdx].text}`);
+        }
+
+        // ==================== FACE-LOCK HANDLERS ====================
+        function handleMcFaceUpload(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                const commaIdx = dataUrl.indexOf(',');
+                const meta = dataUrl.substring(0, commaIdx);
+                mcFaceBase64 = dataUrl.substring(commaIdx + 1);
+                const mimeMatch = meta.match(/data:(.*?);base64/);
+                mcFaceMime = mimeMatch ? mimeMatch[1] : 'image/png';
+
+                const preview = document.getElementById('mc-face-preview');
+                preview.innerHTML = `<img src="${dataUrl}" class="w-full h-full object-cover" alt="Foto MC">`;
+                preview.classList.remove('border-dashed');
+                preview.classList.add('border-solid', 'border-cyan-400');
+
+                document.getElementById('mc-face-status').innerHTML = `<span class="text-emerald-400 font-bold">✓ Wajah Terkunci (${file.name})</span>`;
+                document.getElementById('mc-face-clear').classList.remove('hidden');
+                syncPromptWithDialog();
+                showToast('Foto wajah bosq berhasil dikunci ke karakter MC!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearMcFace() {
+            mcFaceBase64 = null;
+            mcFaceMime = null;
+            document.getElementById('mc-face-input').value = '';
+            const preview = document.getElementById('mc-face-preview');
+            preview.innerHTML = `
+                <svg class="w-6 h-6 text-cyan-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span class="text-[9px] text-zinc-400 mt-0.5 text-center">Foto Anda</span>
+            `;
+            preview.classList.add('border-dashed');
+            preview.classList.remove('border-solid', 'border-cyan-400');
+            document.getElementById('mc-face-status').textContent = 'Upload foto wajah agar MC di foto & video memakai wajah bosq.';
+            document.getElementById('mc-face-clear').classList.add('hidden');
+            syncPromptWithDialog();
+            showToast('Foto referensi wajah MC dihapus.');
+        }
+
+        // ==================== DIALOG GENERATOR (INSTANT + AI) ====================
+        function getInstantDialogTemplates(segment, f1, f2) {
+            if (segment === 'opening') {
+                return [
+                    {
+                        tag: "Gaya Video 1 (Tegas & Hype)",
+                        text: `Ini dia! Pertarungan antara ${f1} versus ${f2}, dimulai!`
+                    },
+                    {
+                        tag: "Gaya Video 2 (Host Heboh)",
+                        text: `Halo bosq! Battle paling panas resmi dimulai! Dua petarung terkuat, ${f1} melawan ${f2}, siap saling bantai! Siapa pemenangnya? Mari kita lihat!`
+                    },
+                    {
+                        tag: "Gaya Turnamen Epik",
+                        text: `Selamat datang di arena! Di sudut kiri ada ${f1}, dan di sudut kanan siap menghadang ${f2}! Tanpa basa-basi lagi, saksikan pertarungan sengit mereka sekarang!`
+                    }
+                ];
+            } else if (segment === 'hype') {
+                return [
+                    {
+                        tag: "Komentar Pecah",
+                        text: `Waduh gila banget serangan barusan! ${f1} dan ${f2} sama-sama gak mau ngalah bosq! Menurut kalian siapa yang bakal tumbang duluan?`
+                    },
+                    {
+                        tag: "Ketegangan Puncak",
+                        text: `Makin panas bosq! Jurus andalan mulai dikeluarkan, duel antara ${f1} lawan ${f2} benar-benar di luar dugaan!`
+                    },
+                    {
+                        tag: "Shoutcaster Cepat",
+                        text: `Luar biasa! Refleks yang sangat cepat! Apakah ${f2} mampu membalikkan keadaan melawan ${f1}? Kita saksikan terus!`
+                    }
+                ];
+            } else {
+                return [
+                    {
+                        tag: "Gaya Video 3 (Tanya Penonton)",
+                        text: `Gimana menurut kalian aksi dari ${f1} dan ${f2} tadi, bosq? Pecah banget kan! Aksi mereka benar-benar luar biasa! Tulis jagoan kalian di komentar!`
+                    },
+                    {
+                        tag: "Gaya Video 4 (Closing & CTA)",
+                        text: `Kalau kalian suka konten battle seperti ini, yuk dukung terus channel ini dengan follow dan bagikan! Sampai jumpa di episode berikutnya!`
+                    },
+                    {
+                        tag: "Closing Singkat Padat",
+                        text: `Pertarungan yang luar biasa antara ${f1} versus ${f2}! Jangan lupa like, follow, dan request duel berikutnya di kolom komentar ya bosq!`
+                    }
+                ];
+            }
+        }
+
+        function generateDialogPresets() {
+            const segment = document.getElementById('mc-segment-select').value;
+            const f1 = document.getElementById('fighter-1').value.trim() || "Petarung 1";
+            const f2 = document.getElementById('fighter-2').value.trim() || "Petarung 2";
+
+            const badge = document.getElementById('active-segment-badge');
+            badge.textContent = `Segmen: ${segment.toUpperCase()}`;
+
+            currentDialogList = getInstantDialogTemplates(segment, f1, f2);
+            selectedDialogIndex = 0;
+            renderDialogCards();
+        }
+
+        function renderDialogCards() {
+            const grid = document.getElementById('dialog-options-grid');
+            grid.innerHTML = currentDialogList.map((item, idx) => `
+                <button type="button" onclick="selectDialogCard(${idx})" class="text-left p-3.5 rounded-xl border border-zinc-800 bg-stage-950/90 hover:border-amber-500/60 transition flex flex-col justify-between gap-2 ${idx === selectedDialogIndex ? 'dialog-card-active' : ''}">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/15 text-amber-400">${item.tag}</span>
+                        ${idx === selectedDialogIndex ? '<span class="text-[10px] font-bold text-emerald-400">✓ Dipilih</span>' : ''}
+                    </div>
+                    <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">"${item.text}"</p>
+                </button>
+            `).join('');
+
+            if (currentDialogList[selectedDialogIndex]) {
+                document.getElementById('selected-dialog-input').value = currentDialogList[selectedDialogIndex].text;
+                syncPromptWithDialog();
+            }
+        }
+
+        function selectDialogCard(idx) {
+            selectedDialogIndex = idx;
+            renderDialogCards();
+            showToast('Naskah dialog MC dipilih!');
+        }
+
+        async function fetchWithRetry(url, options, maxRetries = 4) {
+            let delay = 1000;
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const res = await fetch(url, options);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return await res.json();
+                } catch (err) {
+                    if (i === maxRetries - 1) throw err;
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        async function generateAiDialogs() {
+            const btn = document.getElementById('btn-ai-dialogs');
+            const segment = document.getElementById('mc-segment-select').value;
+            const f1 = document.getElementById('fighter-1').value.trim() || "Petarung 1";
+            const f2 = document.getElementById('fighter-2').value.trim() || "Petarung 2";
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+            showToast('AI sedang meracik 3 variasi dialog MC baru...');
+
+            const prompt = `Buatkan 3 variasi naskah dialog MC / Host turnamen game anime Bahasa Indonesia yang sangat ekspresif, heboh, natural, dan cocok untuk video pendek Reels/Shorts (durasi 8 detik).
+            Segmen: ${segment.toUpperCase()} (${segment === 'opening' ? 'pembukaan pertandingan menyebut nama petarung' : segment === 'hype' ? 'komentar seru di tengah pertarungan' : 'penutup setelah battle selesai, tanya pendapat penonton & ajak follow/share'}).
+            Petarung 1: ${f1}. Petarung 2: ${f2}.
+            Setiap dialog maksimal 22 kata agar pas diucapkan dalam 6-8 detik.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                tag: { type: "STRING" },
+                                text: { type: "STRING" }
+                            },
+                            required: ["tag", "text"]
+                        }
+                    }
+                }
+            };
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+                const data = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }, 2);
+                const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    currentDialogList = parsed;
+                    selectedDialogIndex = 0;
+                    renderDialogCards();
+                    showToast('3 variasi dialog MC baru siap dipilih!');
+                }
+            } catch (err) {
+                console.error(err);
+                showToast('Gagal memuat variasi AI, gunakan template tersedia.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+            }
+        }
+
+        // ==================== SYNC PROMPT VIDEO MC ====================
+        function syncPromptWithDialog() {
+            const costumeKey = document.getElementById('mc-costume-select').value;
+            const costume = COSTUME_PRESETS[costumeKey];
+            const arenaDesc = document.getElementById('mc-arena-desc').value.trim();
+            const dialogText = document.getElementById('selected-dialog-input').value.trim();
+            const ratio = document.getElementById('mc-aspect-ratio').value;
+            const faceNote = mcFaceBase64 ? "Maintain the exact facial identity and likeness of the person in the reference image. " : "";
+
+            const prompt = `Ultra-realistic 4K live-action video of ${costume.visualEn}, standing in front of ${arenaDesc}. ${faceNote}Dynamic smooth push-in camera movement toward the MC as they speak passionately into the microphone with expressive hand gestures, natural lip-sync, and energetic facial expressions, delivering the Indonesian line: "${dialogText}". Crisp broadcast microphone voice audio, subtle arena crowd ambience and dramatic hype music, cinematic lighting --ar ${ratio}`;
+
+            document.getElementById('final-video-prompt').value = prompt;
+            updateCharBadge();
+        }
+
+        function updateCharBadge() {
+            const val = document.getElementById('final-video-prompt').value;
+            const badge = document.getElementById('prompt-char-count');
+            badge.textContent = `${val.length}/850 kar`;
+            badge.className = val.length <= 850
+                ? 'text-[11px] font-mono px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400'
+                : 'text-[11px] font-mono px-2.5 py-1 rounded bg-rose-500/15 text-rose-400';
+        }
+
+        // ==================== GENERATE MC IMAGE (WITH FACE-LOCK) ====================
+        async function callMcImageEngine(promptText, aspectRatio = "9:16") {
+            const parts = [{ text: promptText }];
+            if (mcFaceBase64) {
+                parts.push({
+                    inlineData: {
+                        mimeType: mcFaceMime || 'image/png',
+                        data: mcFaceBase64
+                    }
+                });
+            }
+
+            const payload = {
+                contents: [{ role: 'user', parts: parts }],
+                generationConfig: {
+                    responseModalities: ['TEXT', 'IMAGE'],
+                    imageConfig: { aspectRatio: aspectRatio }
+                }
+            };
+
+            const models = [
+                'gemini-2.5-flash-image-preview',
+                'gemini-2.0-flash-exp-image-generation',
+                'gemini-3.1-flash-image'
+            ];
+
+            for (const model of models) {
+                try {
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+                    const data = await fetchWithRetry(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    }, 2);
+                    const imgPart = data?.candidates?.[0]?.content?.parts?.find(p => p.inlineData && p.inlineData.data);
+                    if (imgPart) {
+                        return `data:${imgPart.inlineData.mimeType || 'image/png'};base64,${imgPart.inlineData.data}`;
+                    }
+                } catch (e) {
+                    console.warn(`Fallback dari ${model}:`, e);
+                }
+            }
+
+            const imagenUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+            const imagenRes = await fetchWithRetry(imagenUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    instances: [{ prompt: promptText }],
+                    parameters: { sampleCount: 1, aspectRatio: aspectRatio }
+                })
+            }, 2);
+            const b64 = imagenRes?.predictions?.[0]?.bytesBase64Encoded;
+            if (b64) return `data:image/png;base64,${b64}`;
+
+            throw new Error("Gagal merender gambar MC.");
+        }
+
+        async function generateMcImageAndPrompt() {
+            const btn = document.getElementById('btn-generate-all');
+            const imgBox = document.getElementById('mc-image-box');
+            const costumeKey = document.getElementById('mc-costume-select').value;
+            const costume = COSTUME_PRESETS[costumeKey];
+            const arenaDesc = document.getElementById('mc-arena-desc').value.trim();
+            const ratio = document.getElementById('mc-aspect-ratio').value;
+
+            syncPromptWithDialog();
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            imgBox.className = ratio === "9:16"
+                ? "aspect-[9/16] max-h-[540px] mx-auto rounded-xl bg-stage-950 border border-amber-500/40 overflow-hidden flex items-center justify-center p-4 text-center relative"
+                : "aspect-video w-full rounded-xl bg-stage-950 border border-amber-500/40 overflow-hidden flex items-center justify-center p-4 text-center relative";
+
+            imgBox.innerHTML = `<div class="flex flex-col items-center gap-3"><div class="w-10 h-10 border-4 border-amber-500/30 border-t-amber-400 rounded-full animate-spin"></div><p class="text-xs text-zinc-300 font-medium">${mcFaceBase64 ? 'Merender MC dengan Face-Lock wajah Anda...' : 'Merender karakter MC di arena...'}</p></div>`;
+
+            const faceLockInstruction = mcFaceBase64
+                ? `CRITICAL FACE-LOCK INSTRUCTION: Preserve the exact facial identity, eyes, nose, jawline, and likeness of the person in the provided reference photo. Seamlessly place this exact person's face onto the MC host character. `
+                : '';
+
+            const imagePrompt = `${faceLockInstruction}Ultra-realistic 8K medium-full shot photography of ${costume.visualEn}, standing in front of ${arenaDesc}. The MC is looking directly at the camera with an enthusiastic, charismatic expression while speaking into the handheld microphone. Dramatic stage spotlights, realistic skin texture, sharp fabric details, shallow depth of field, no text, no subtitles, no watermark.`;
+
+            try {
+                const imgUrl = await callMcImageEngine(imagePrompt, ratio);
+                latestMcImageDataUrl = imgUrl;
+                imgBox.innerHTML = `
+                    <img src="${imgUrl}" class="w-full h-full object-cover" alt="MC Host Render">
+                    ${mcFaceBase64 ? '<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-cyan-600/90 text-white text-[10px] font-bold backdrop-blur-sm">FACE-LOCK AKTIF</span>' : ''}
+                `;
+                showToast('Foto MC & Prompt Video berhasil dibuat!');
+            } catch (err) {
+                console.error(err);
+                imgBox.innerHTML = `<p class="text-xs text-rose-400">Gagal merender foto MC. Silakan klik tombol lagi.</p>`;
+                showToast('Gagal merender foto MC.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+            }
+        }
+
+        function downloadMcImage() {
+            if (!latestMcImageDataUrl) {
+                showToast('Generate foto MC terlebih dahulu sebelum mengunduh!', 'error');
+                return;
+            }
+            try {
+                const arr = latestMcImageDataUrl.split(',');
+                const mime = arr[0].match(/:(.*?);/)[1];
+                const bstr = atob(arr[1]);
+                let n = bstr.length;
+                const u8arr = new Uint8Array(n);
+                while (n--) u8arr[n] = bstr.charCodeAt(n);
+                const blob = new Blob([u8arr], { type: mime });
+                const blobUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = `ai-mc-host-${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+                showToast('Foto MC berhasil diunduh!');
+            } catch (e) {
+                window.open(latestMcImageDataUrl, '_blank');
+            }
+        }
+
+        function copyFinalPrompt() {
+            const ta = document.getElementById('final-video-prompt');
+            ta.select();
+            document.execCommand('copy');
+            showToast('Prompt Video MC berhasil disalin!');
+        }
+
+        function resetStudio() {
+            clearMcFace();
+            latestMcImageDataUrl = null;
+            document.getElementById('fighter-1').value = "Choji Akimichi";
+            document.getElementById('fighter-2').value = "Shikamaru Nara";
+            document.getElementById('mc-segment-select').value = "opening";
+            document.getElementById('mc-arena-select').value = "0";
+            updateArenaPreviewText();
+            generateDialogPresets();
+            document.getElementById('mc-image-box').innerHTML = `<div class="space-y-2"><p class="text-xs text-zinc-400">Klik tombol <span class="text-amber-400 font-bold">"GENERATE FOTO MC & PROMPT VIDEO"</span> untuk merender host MC di arena pilihan Anda.</p></div>`;
+            showToast('Studio MC berhasil direset!');
+        }
+
+        // Inisialisasi saat halaman dimuat
+        document.getElementById('mc-costume-select').addEventListener('change', syncPromptWithDialog);
+        document.getElementById('mc-aspect-ratio').addEventListener('change', syncPromptWithDialog);
+        document.getElementById('mc-arena-desc').addEventListener('input', syncPromptWithDialog);
+        window.addEventListener('DOMContentLoaded', () => {
+            generateDialogPresets();
+        });
+    </script>
+</body>
+</html>
