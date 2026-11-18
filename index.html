@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI MC BATTLE & HOST STUDIO - Generator MC Opening, Closing & Face-Lock</title>
+    <title>AI MC BATTLE & HOST STUDIO - 17 Model Kostum, Face-Lock & TTS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
     <script>
@@ -64,9 +64,9 @@
                         <h1 class="font-stage font-extrabold text-sm sm:text-lg tracking-wider bg-gradient-to-r from-white via-amber-200 to-rose-300 bg-clip-text text-transparent">
                             AI MC BATTLE STUDIO
                         </h1>
-                        <span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-amber-500/15 text-amber-400 border border-amber-500/30">HOST PRO</span>
+                        <span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-amber-500/15 text-amber-400 border border-amber-500/30">17 KOSTUM PRO</span>
                     </div>
-                    <p class="text-[11px] text-zinc-400 hidden sm:block">Generator Host MC Opening/Closing, Face-Lock Wajah, Arena Panggung & Dialog Otomatis</p>
+                    <p class="text-[11px] text-zinc-400 hidden sm:block">17 Model Kostum Viral, Face-Lock Wajah, Arena Tematik Otomatis &amp; TTS Lip-Sync</p>
                 </div>
             </div>
 
@@ -82,10 +82,10 @@
         <!-- TOP SECTION: 3 KOLOM KONFIGURASI MC -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
-            <!-- KOLOM 1: FACE-LOCK & GAYA KOSTUM MC (4 Kolom) -->
+            <!-- KOLOM 1: FACE-LOCK & 17 GAYA KOSTUM MC (4 Kolom) -->
             <div class="lg:col-span-4 glass-panel rounded-2xl p-5 space-y-4 border-t border-cyan-500/30">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-stage font-bold text-cyan-400">1. WAJAH & KOSTUM MC</span>
+                    <span class="text-xs font-stage font-bold text-cyan-400">1. WAJAH &amp; 17 MODEL KOSTUM MC</span>
                     <span class="px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 text-[10px] font-semibold">Face-Lock</span>
                 </div>
 
@@ -97,35 +97,60 @@
                     </div>
                     <div class="flex-1 space-y-1.5">
                         <p class="text-xs font-semibold text-white">Gunakan Wajah Anda Jadi MC</p>
-                        <p id="mc-face-status" class="text-[11px] text-zinc-400 leading-tight">Upload foto wajah agar MC di foto & video memakai wajah bosq.</p>
+                        <p id="mc-face-status" class="text-[11px] text-zinc-400 leading-tight">Upload foto wajah agar MC di foto &amp; video memakai wajah bosq.</p>
                         <div class="flex items-center gap-2 pt-0.5">
                             <input type="file" id="mc-face-input" accept="image/*" class="hidden" onchange="handleMcFaceUpload(event)">
-                            <button onclick="document.getElementById('mc-face-input').click()" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-bold text-[11px] transition">
+                            <button type="button" onclick="document.getElementById('mc-face-input').click()" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-bold text-[11px] transition">
                                 + Upload Foto
                             </button>
-                            <button id="mc-face-clear" onclick="clearMcFace()" class="hidden px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-rose-600 text-zinc-300 hover:text-white text-[11px] transition">
+                            <button type="button" id="mc-face-clear" onclick="clearMcFace()" class="hidden px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-rose-600 text-zinc-300 hover:text-white text-[11px] transition">
                                 Hapus
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pilihan Kostum / Karakter MC -->
+                <!-- Pilihan 17 Kostum / Karakter MC -->
                 <div class="space-y-1.5">
-                    <label class="block text-xs text-zinc-400">Pilih Gaya & Kostum MC</label>
-                    <select id="mc-costume-select" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-500">
-                        <option value="shinobi_tactical" selected>1. MC Pria Shinobi Tactical Vest & Ikat Kepala (Gaya Video 1)</option>
-                        <option value="glamour_woman">2. MC Wanita Gaun Hitam Elegan Glamour (Gaya Video 2)</option>
-                        <option value="muscle_tank">3. MC Pria Berotot Rompi Taktis & Bandana (Gaya Video 3)</option>
-                        <option value="batik_tactical">4. MC Pria Kemeja Batik Taktis & Ikat Kepala Nusantara (Gaya Video 4)</option>
-                        <option value="esports_caster">5. MC Shoutcaster Esports Jaket Neon Futuristik</option>
-                        <option value="boxing_announcer">6. MC Ring Announcer Jas Tuksedo Mewah Klasik</option>
+                    <label class="block text-xs text-zinc-400">Pilih Gaya &amp; Kostum MC (17 Model Viral)</label>
+                    <select id="mc-costume-select" onchange="handleCostumeThemeSync()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-500">
+                        <optgroup label="🎮 Baju Rental PS &amp; Gaming Warnet Viral">
+                            <option value="rental_ps_hoodie" selected>1. MC Baju Rental PS / Gamer Santai + Stik PS &amp; Mic</option>
+                            <option value="rental_ps_jersey">2. MC Jersey Esports Rental PS Pro + Kalung ID</option>
+                        </optgroup>
+                        <optgroup label="🍥 Tema Naruto Shippuden">
+                            <option value="shinobi_tactical">3. MC Shinobi Tactical Vest &amp; Ikat Kepala</option>
+                            <option value="naruto_hokage">4. MC Jubah Hokage Putih-Merah &amp; Caping</option>
+                            <option value="naruto_akatsuki">5. MC Jubah Hitam Awan Merah Akatsuki</option>
+                        </optgroup>
+                        <optgroup label="🐉 Tema Dragon Ball Z / Super">
+                            <option value="dragonball_gi">6. MC Baju Bela Diri Oranye-Biru Kame (Goku Style)</option>
+                            <option value="dragonball_announcer">7. MC Wasit Turnamen Tenkaichi Budokai Berkacamata</option>
+                        </optgroup>
+                        <optgroup label="🏴‍☠️ Tema One Piece">
+                            <option value="onepiece_pirate">8. MC Bajak Laut Topi Jerami &amp; Rompi Merah</option>
+                            <option value="onepiece_captain">9. MC Mantel Kapten Bajak Laut Berbulu di Bahu</option>
+                        </optgroup>
+                        <optgroup label="🤼 Tema SmackDown / WWE">
+                            <option value="smackdown_champ">10. MC Pegulat SmackDown + Sabuk Juara Emas di Bahu</option>
+                            <option value="boxing_announcer">11. MC Ring Announcer SmackDown Jas Tuksedo Klasik</option>
+                        </optgroup>
+                        <optgroup label="🔥 Anime Viral (JJK, Demon Slayer, Solo Leveling, Dandadan)">
+                            <option value="viral_jjk">12. MC Jujutsu Kaisen (Seragam Hitam Penyihir Tokyo)</option>
+                            <option value="viral_demonslayer">13. MC Demon Slayer (Haori Kotak Hijau-Hitam &amp; Katana)</option>
+                            <option value="viral_sololeveling">14. MC Solo Leveling (Jaket Hitam Shadow Monarch Aura Ungu)</option>
+                            <option value="viral_dandadan">15. MC Dandadan (Gaya Okarun Turbo Granny &amp; Kacamata)</option>
+                        </optgroup>
+                        <optgroup label="✨ Host Spesial &amp; Nusantara">
+                            <option value="glamour_woman">16. MC Wanita Gaun Hitam Elegan Glamour</option>
+                            <option value="batik_tactical">17. MC Pria Kemeja Batik Taktis &amp; Ikat Kepala Nusantara</option>
+                        </optgroup>
                     </select>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="block text-xs text-zinc-400">Rasio Visual & Video</label>
-                    <select id="mc-aspect-ratio" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-500">
+                    <label class="block text-xs text-zinc-400">Rasio Visual &amp; Video</label>
+                    <select id="mc-aspect-ratio" onchange="syncPromptWithDialog()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-500">
                         <option value="9:16" selected>9:16 (Vertikal - Reels / Shorts / TikTok)</option>
                         <option value="16:9">16:9 (Horizontal - YouTube)</option>
                     </select>
@@ -134,76 +159,117 @@
 
             <!-- KOLOM 2: PILIHAN ARENA / PANGGUNG LATAR (4 Kolom) -->
             <div class="lg:col-span-4 glass-panel rounded-2xl p-5 space-y-4 border-t border-amber-500/30">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-stage font-bold text-amber-400">2. ARENA & PANGGUNG MC</span>
-                    <button onclick="randomizeMcArena()" class="px-2.5 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/30 text-amber-300 text-[10px] font-bold border border-amber-500/30 transition">
-                        🎲 Acak Arena
-                    </button>
+                <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs font-stage font-bold text-amber-400">2. ARENA &amp; PANGGUNG MC</span>
+                    <div class="flex items-center gap-1.5">
+                        <label class="inline-flex items-center gap-1 text-[10px] text-zinc-300 cursor-pointer select-none bg-stage-950 px-2 py-0.5 rounded border border-zinc-800">
+                            <input type="checkbox" id="auto-sync-arena" checked class="accent-amber-500">
+                            <span>Auto-Tema</span>
+                        </label>
+                        <button type="button" onclick="randomizeMcArena()" class="px-2.5 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/30 text-amber-300 text-[10px] font-bold border border-amber-500/30 transition">
+                            🎲 Acak Arena
+                        </button>
+                    </div>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="block text-xs text-zinc-400">Pilih Lokasi / Latar Belakang MC</label>
+                    <label class="block text-xs text-zinc-400">Pilih Lokasi / Latar Belakang MC (12 Arena Tematik)</label>
                     <select id="mc-arena-select" onchange="updateArenaPreviewText()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-500">
-                        <option value="0" selected>1. Galeri Lukisan Tinta Manga Hitam-Putih Raksasa (Gaya Video 1)</option>
-                        <option value="1">2. Stadion Turnamen Raksasa Penuh Layar LED Roster Anime (Gaya Video 2)</option>
-                        <option value="2">3. Ruangan Galeri Koleksi Kartu Ninja & Monitor Gaming (Gaya Video 3 & 4)</option>
-                        <option value="3">4. Arena Ujian Chunin Konoha dengan Penonton Ribuan Shinobi</option>
-                        <option value="4">5. Panggung Esports Cyberpunk Neon Biru-Merah & Sorot Lampu</option>
-                        <option value="5">6. Lembah Akhir (Air Terjun Megah & Patung Raksasa Berk kabut)</option>
-                        <option value="6">7. Ring Pertarungan Oktagon Bawah Tanah dengan Efek Percikan Api</option>
-                        <option value="7">8. Studio Podcast / Broadcast Modern Minimalis dengan LED Strip</option>
-                        <option value="8">9. Kuil Kuno Jepang Malam Hari dengan Lentera Menyala & Bulan Purnama</option>
-                        <option value="9">10. Koloseum Batu Megah Terbuka di Bawah Langit Senja Membara</option>
+                        <option value="0" selected>1. Rental PS / Warnet Gaming Ramai TV LED &amp; Poster Game</option>
+                        <option value="1">2. Arena Turnamen Dunia Dragon Ball (Tenkaichi Budokai)</option>
+                        <option value="2">3. Geladak Kapal Bajak Laut One Piece &amp; Lautan Biru Epik</option>
+                        <option value="3">4. Ring Gulat SmackDown WWE Penuh Lampu Sorot &amp; Penonton</option>
+                        <option value="4">5. Stasiun Shibuya Malam Neon Ungu (Jujutsu Kaisen / Dandadan)</option>
+                        <option value="5">6. Kastil Infinity / Hutan Bambu Lentera (Demon Slayer)</option>
+                        <option value="6">7. Gerbang Dungeon Merah &amp; Tentara Bayangan (Solo Leveling)</option>
+                        <option value="7">8. Galeri Lukisan Tinta Manga Hitam-Putih Raksasa (Naruto)</option>
+                        <option value="8">9. Stadion Turnamen Raksasa Penuh Layar LED Roster Anime</option>
+                        <option value="9">10. Arena Ujian Chunin Konoha dengan Ribuan Penonton Shinobi</option>
+                        <option value="10">11. Lembah Akhir (Air Terjun Megah &amp; Patung Raksasa Berkabut)</option>
+                        <option value="11">12. Studio Broadcast Modern Minimalis dengan LED Strip &amp; Neon VS</option>
                     </select>
                 </div>
 
                 <div class="space-y-1.5">
                     <label class="block text-xs text-zinc-400">Deskripsi Detail Arena (Bisa Diedit)</label>
-                    <textarea id="mc-arena-desc" rows="4" class="w-full bg-stage-950 border border-zinc-700 rounded-xl p-3 text-xs text-zinc-200 leading-relaxed focus:outline-none focus:border-amber-500">A massive illuminated wall mural behind the MC displaying detailed black-and-white Japanese sumi-e ink manga artwork of dramatic anime warriors and swirling ink clouds, modern gallery ceiling spotlights</textarea>
+                    <textarea id="mc-arena-desc" rows="4" oninput="syncPromptWithDialog()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl p-3 text-xs text-zinc-200 leading-relaxed focus:outline-none focus:border-amber-500">A lively Indonesian PlayStation rental gaming lounge with rows of glowing flat-screen TVs running fighting games, colorful gaming posters on the wall, RGB LED strips, and excited friends watching in the background</textarea>
                 </div>
             </div>
 
-            <!-- KOLOM 3: SETTING PERTARUNGAN & SEGMEN MC (4 Kolom) -->
+            <!-- KOLOM 3: SETTING PERTARUNGAN, GAYA BAHASA & SEGMEN MC (4 Kolom) -->
             <div class="lg:col-span-4 glass-panel rounded-2xl p-5 space-y-4 border-t border-rose-500/30">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-stage font-bold text-rose-400">3. DATA BATTLE & SEGMEN</span>
+                    <span class="text-xs font-stage font-bold text-rose-400">3. DATA BATTLE &amp; GAYA MC</span>
                     <span class="px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 text-[10px] font-semibold">Auto Dialog</span>
                 </div>
 
-                <div class="space-y-1.5">
-                    <label class="block text-xs text-zinc-400">Pilih Segmen Video MC</label>
-                    <select id="mc-segment-select" onchange="generateDialogPresets()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
-                        <option value="opening" selected>OPENING (Pembuka Battle & Sebut Nama Petarung)</option>
-                        <option value="hype">HYPE / TENGAH (Komentar Panas Saat Pertarungan)</option>
-                        <option value="closing">CLOSING (Penutup, Tanya Penonton & Ajak Follow/Share)</option>
-                    </select>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block text-[11px] text-zinc-400 mb-1">Segmen Video MC</label>
+                        <select id="mc-segment-select" onchange="generateDialogPresets()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
+                            <option value="opening" selected>OPENING (Pembuka)</option>
+                            <option value="hype">HYPE (Tengah Duel)</option>
+                            <option value="closing">CLOSING (Penutup)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-zinc-400 mb-1">Gaya Bahasa MC</label>
+                        <select id="mc-tone-select" onchange="generateDialogPresets()" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-2.5 py-2 text-xs text-amber-300 font-semibold focus:outline-none focus:border-rose-500">
+                            <option value="gaul_viral" selected>Gaul Viral Indonesia (Bosq / Pecah)</option>
+                            <option value="esports_pro">Shoutcaster Esports Pro</option>
+                            <option value="epic_drama">Dramatis Turnamen Epik</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Upload Gambar VS Battle -> Auto Isi Nama Petarung -->
+                <div class="bg-stage-950/90 p-2.5 rounded-xl border border-dashed border-rose-500/40 hover:border-rose-400 transition space-y-2" ondragover="event.preventDefault()" ondrop="handleVsScreenDrop(event)">
+                    <div class="flex items-center gap-2.5">
+                        <div id="vs-screen-preview" onclick="document.getElementById('vs-screen-input').click()" class="w-20 h-12 rounded-lg bg-stage-900 border border-zinc-700 flex flex-col items-center justify-center overflow-hidden shrink-0 cursor-pointer">
+                            <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <span class="text-[8px] text-zinc-400">Layar VS</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[11px] font-bold text-white truncate">Upload Gambar VS Battle → Auto Isi Nama</p>
+                            <p id="vs-scan-status" class="text-[10px] text-zinc-400 truncate">Tarik/upload screenshot VS untuk deteksi nama otomatis.</p>
+                        </div>
+                        <div class="flex flex-col gap-1 shrink-0">
+                            <input type="file" id="vs-screen-input" accept="image/*" class="hidden" onchange="handleVsScreenUpload(event)">
+                            <button type="button" onclick="document.getElementById('vs-screen-input').click()" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-[10px] transition">
+                                Upload VS
+                            </button>
+                            <button type="button" id="btn-rescan-vs" onclick="scanVsBattleImage()" class="hidden px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-zinc-700 font-bold text-[10px] transition">
+                                Scan Ulang
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2.5">
                     <div>
                         <label class="block text-[11px] text-zinc-400 mb-1">Petarung 1 (Kiri)</label>
-                        <input type="text" id="fighter-1" value="Choji Akimichi" oninput="generateDialogPresets()" placeholder="Nama Petarung 1" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
+                        <input type="text" id="fighter-1" value="Shikamaru Nara" oninput="generateDialogPresets()" placeholder="Nama Petarung 1" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
                     </div>
                     <div>
                         <label class="block text-[11px] text-zinc-400 mb-1">Petarung 2 (Kanan)</label>
-                        <input type="text" id="fighter-2" value="Shikamaru Nara" oninput="generateDialogPresets()" placeholder="Nama Petarung 2" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
+                        <input type="text" id="fighter-2" value="Choji Akimichi" oninput="generateDialogPresets()" placeholder="Nama Petarung 2" class="w-full bg-stage-950 border border-zinc-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500">
                     </div>
                 </div>
 
                 <div class="pt-1 flex flex-col gap-2">
-                    <button onclick="generateAiDialogs()" id="btn-ai-dialogs" class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-amber-300 font-bold text-xs transition flex items-center justify-center gap-1.5">
+                    <button type="button" onclick="generateAiDialogs()" id="btn-ai-dialogs" class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-amber-300 font-bold text-xs transition flex items-center justify-center gap-1.5">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                         <span>Acak / Buat Variasi Dialog Baru (AI)</span>
                     </button>
-                    <button onclick="generateMcImageAndPrompt()" id="btn-generate-all" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 via-rose-600 to-purple-600 hover:from-amber-400 hover:to-purple-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-rose-600/25 transition flex items-center justify-center gap-2">
+                    <button type="button" onclick="generateMcImageAndPrompt()" id="btn-generate-all" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 via-rose-600 to-purple-600 hover:from-amber-400 hover:to-purple-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-rose-600/25 transition flex items-center justify-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                        <span>GENERATE FOTO MC & PROMPT VIDEO</span>
+                        <span>GENERATE FOTO MC &amp; PROMPT VIDEO</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- MIDDLE SECTION: PILIHAN DIALOG OTOMATIS TINGGAL KLIK -->
+        <!-- MIDDLE SECTION: PILIHAN DIALOG OTOMATIS & TES SUARA TTS -->
         <section class="glass-panel rounded-2xl p-5 space-y-3 border border-zinc-800">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
@@ -222,9 +288,14 @@
                 <!-- Dialog cards injected automatically -->
             </div>
 
-            <!-- Custom / Selected Dialog Editor -->
-            <div class="pt-2">
-                <label class="block text-xs font-semibold text-zinc-400 mb-1">Naskah Dialog MC Terpilih (Bisa Diedit Langsung):</label>
+            <!-- Custom / Selected Dialog Editor + Voice TTS Button -->
+            <div class="pt-2 space-y-2">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <label class="block text-xs font-semibold text-zinc-400">Naskah Dialog MC Terpilih (Bisa Diedit Langsung):</label>
+                    <button type="button" onclick="previewMcVoice()" class="px-3.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center gap-1.5">
+                        <span>▶ Tes Suara Intonasi MC (TTS)</span>
+                    </button>
+                </div>
                 <textarea id="selected-dialog-input" oninput="syncPromptWithDialog()" rows="2" class="w-full bg-stage-950 border border-amber-500/40 rounded-xl p-3 text-sm text-white font-medium focus:outline-none focus:border-amber-400"></textarea>
             </div>
         </section>
@@ -236,14 +307,14 @@
             <div class="lg:col-span-5 glass-panel rounded-2xl p-5 space-y-3 border border-zinc-800">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Visual Referensi MC (Siap Image-to-Video)</span>
-                    <button onclick="downloadMcImage()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center gap-1">
+                    <button type="button" onclick="downloadMcImage()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center gap-1">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                         <span>Unduh Foto MC</span>
                     </button>
                 </div>
                 <div id="mc-image-box" class="aspect-[9/16] max-h-[540px] mx-auto rounded-xl bg-stage-950 border border-zinc-800 overflow-hidden flex items-center justify-center p-4 text-center">
                     <div class="space-y-2">
-                        <p class="text-xs text-zinc-400">Klik tombol <span class="text-amber-400 font-bold">"GENERATE FOTO MC & PROMPT VIDEO"</span> untuk merender host MC di arena pilihan Anda.</p>
+                        <p class="text-xs text-zinc-400">Klik tombol <span class="text-amber-400 font-bold">"GENERATE FOTO MC &amp; PROMPT VIDEO"</span> untuk merender host MC di arena pilihan Anda.</p>
                     </div>
                 </div>
             </div>
@@ -264,7 +335,7 @@
 
                 <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-zinc-800">
                     <span class="text-xs text-zinc-400">Format: Kamera dinamis + Lip-sync jelas + SFX Mic</span>
-                    <button onclick="copyFinalPrompt()" class="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-cyan-600/20 transition flex items-center gap-2">
+                    <button type="button" onclick="copyFinalPrompt()" class="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-cyan-600/20 transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                         <span>COPY PROMPT VIDEO MC</span>
                     </button>
@@ -284,49 +355,98 @@
         const apiKey = "";
         let mcFaceBase64 = null;
         let mcFaceMime = null;
+        let vsScreenBase64 = null;
+        let vsScreenMime = null;
         let latestMcImageDataUrl = null;
         let selectedDialogIndex = 0;
         let currentDialogList = [];
 
-        // ==================== DATA PRESET KOSTUM & ARENA ====================
+        // ==================== 17 MODEL & KOSTUM MC PRESETS ====================
         const COSTUME_PRESETS = {
+            rental_ps_hoodie: {
+                label: "MC Baju Rental PS / Gamer Santai",
+                visualEn: "an energetic young Indonesian male gamer MC host wearing an oversized graphic gaming hoodie, casual shorts, and gaming headset around his neck, holding a wireless PlayStation controller in one hand and a handheld microphone in the other"
+            },
+            rental_ps_jersey: {
+                label: "MC Jersey Esports Rental PS Pro",
+                visualEn: "a charismatic young Indonesian esports shoutcaster wearing a sleek black-and-orange local PS rental tournament jersey with a VIP lanyard pass, holding a wireless broadcast microphone with high hype energy"
+            },
             shinobi_tactical: {
-                label: "MC Pria Shinobi Tactical Vest",
-                visualEn: "an energetic young Indonesian male MC host wearing a dark grey tactical hoodie, olive-drab military tactical chest rig vest with pouches, black cargo pants, and a shinobi metal headband on his forehead, holding a professional black wireless handheld microphone"
+                label: "MC Shinobi Tactical Vest & Ikat Kepala",
+                visualEn: "an energetic young Indonesian male MC host wearing a dark grey tactical hoodie, olive-drab military tactical chest rig vest with pouches, black cargo pants, and a shinobi metal headband on his forehead, holding a black handheld microphone"
             },
-            glamour_woman: {
-                label: "MC Wanita Gaun Hitam Elegan",
-                visualEn: "a charismatic glamorous Indonesian female MC host with sleek tied-back hair, wearing an elegant off-shoulder black evening gown with sheer flowing sleeves, holding a sleek metallic handheld stage microphone with a bright confident smile"
+            naruto_hokage: {
+                label: "MC Jubah Hokage Putih-Merah",
+                visualEn: "a heroic Indonesian male MC host wearing a white Hokage cloak with red flame patterns at the hem, red shinobi battle armor underneath, and a white-and-red Hokage hat, holding a handheld stage microphone"
             },
-            muscle_tank: {
-                label: "MC Pria Berotot Rompi Taktis",
-                visualEn: "a muscular athletic Indonesian male MC host wearing a camouflage tactical vest over a white fitted undershirt, patterned ninja bandana headband, tactical cargo pants, holding a silver-grilled handheld microphone with high energy"
+            naruto_akatsuki: {
+                label: "MC Jubah Hitam Awan Merah Akatsuki",
+                visualEn: "a cool mysterious Indonesian male MC host wearing a high-collared black cloak decorated with iconic red clouds, holding a sleek black handheld microphone with dramatic expression"
             },
-            batik_tactical: {
-                label: "MC Pria Batik Taktis Nusantara",
-                visualEn: "a friendly young Indonesian male MC host wearing a modern dark patterned Nusantara batik shirt layered under a tan tactical vest, patterned headband, black tactical pants, holding a handheld microphone"
+            dragonball_gi: {
+                label: "MC Baju Bela Diri Kame (Dragon Ball)",
+                visualEn: "an athletic energetic Indonesian male MC host wearing an iconic vibrant orange martial arts gi with a dark blue undershirt, blue wristbands, and blue sash belt, holding a handheld microphone with intense fighting spirit"
             },
-            esports_caster: {
-                label: "MC Shoutcaster Esports Neon",
-                visualEn: "a stylish Indonesian esports shoutcaster host wearing a futuristic black-and-cyan LED-trimmed bomber jacket, headset around neck, holding a broadcast microphone"
+            dragonball_announcer: {
+                label: "MC Wasit Turnamen Tenkaichi Budokai",
+                visualEn: "a lively Indonesian tournament announcer MC wearing a sharp purple suit jacket, white dress shirt, red tie, and dark sunglasses, passionately speaking into a handheld tournament microphone"
+            },
+            onepiece_pirate: {
+                label: "MC Bajak Laut Topi Jerami",
+                visualEn: "a cheerful adventurous Indonesian male MC host wearing a straw hat hanging on his back, an open red button-up pirate vest, blue denim shorts, and a yellow waist sash, holding a handheld microphone with a big grin"
+            },
+            onepiece_captain: {
+                label: "MC Mantel Kapten Bajak Laut",
+                visualEn: "a bold charismatic Indonesian pirate captain MC wearing a dark captain coat with golden epaulets draped over his shoulders and a red captain sash, holding a chrome microphone"
+            },
+            smackdown_champ: {
+                label: "MC Pegulat SmackDown + Sabuk Juara",
+                visualEn: "a muscular hyped Indonesian pro-wrestling MC host wearing a black athletic tank top, wrist wraps, and a massive gleaming gold heavyweight championship belt slung over his shoulder, shouting into a silver-grilled handheld microphone"
             },
             boxing_announcer: {
-                label: "MC Ring Announcer Tuksedo",
+                label: "MC Ring Announcer SmackDown Tuksedo",
                 visualEn: "a charismatic championship ring announcer wearing a sharp tailored black tuxedo suit with gold lapel pin and bow tie, holding a classic chrome broadcast microphone"
+            },
+            viral_jjk: {
+                label: "MC Jujutsu Kaisen (Seragam Penyihir)",
+                visualEn: "a stylish young Indonesian male MC host wearing a dark navy-black high-collared Jujutsu sorcerer uniform jacket with gold swirl buttons and dark blindfold-style sunglasses, holding a handheld microphone"
+            },
+            viral_demonslayer: {
+                label: "MC Demon Slayer (Haori Kotak Hijau-Hitam)",
+                visualEn: "an earnest energetic Indonesian male MC host wearing a green-and-black checkered haori kimono jacket over a dark demon slayer corps uniform, holding a handheld microphone"
+            },
+            viral_sololeveling: {
+                label: "MC Solo Leveling (Shadow Monarch)",
+                visualEn: "a sharp-eyed cool Indonesian male MC host wearing a sleek black trench coat jacket with subtle glowing purple-blue shadow energy aura around his shoulders, holding a black handheld microphone"
+            },
+            viral_dandadan: {
+                label: "MC Dandadan (Gaya Okarun Viral)",
+                visualEn: "a trendy young Indonesian male MC host with messy dark hair, round glasses, wearing a Japanese high school gakuran uniform jacket with a white collar and red accents, holding a handheld microphone with excited expression"
+            },
+            glamour_woman: {
+                label: "MC Wanita Gaun Hitam Elegan Glamour",
+                visualEn: "a charismatic glamorous Indonesian female MC host with sleek tied-back hair, wearing an elegant off-shoulder black evening gown with sheer flowing sleeves, holding a sleek metallic handheld stage microphone with a bright confident smile"
+            },
+            batik_tactical: {
+                label: "MC Pria Kemeja Batik Taktis Nusantara",
+                visualEn: "a friendly young Indonesian male MC host wearing a modern dark patterned Nusantara batik shirt layered under a tan tactical vest, patterned headband, black tactical pants, holding a handheld microphone"
             }
         };
 
+        // ==================== 12 ARENA PRESETS ====================
         const ARENA_PRESETS = [
-            "A massive illuminated wall mural behind the MC displaying detailed black-and-white Japanese sumi-e ink manga artwork of dramatic anime warriors and swirling ink clouds, modern gallery ceiling spotlights",
-            "A colossal packed esports stadium arena behind the MC with a giant curved LED screen displaying a colorful grid of dozens of anime fighter portraits, dazzling concert stage spotlights and cheering crowd",
-            "An indoor gaming & collector gallery room with warm terracotta walls lined with rows of framed anime character cards and gaming monitors on wooden stands",
-            "The grand Chunin Exam tournament arena in Konoha with massive stone walls, giant wooden gate, and thousands of cheering spectators in the stands under bright daylight",
-            "A futuristic cyberpunk esports stage with glowing neon cyan and crimson light beams, digital hologram scoreboards, and dramatic stage smoke",
+            "A lively Indonesian PlayStation rental gaming lounge with rows of glowing flat-screen TVs running fighting games, colorful gaming posters on the wall, RGB LED strips, and excited friends watching in the background",
+            "The grand open-air Tenkaichi Budokai World Martial Arts Tournament stone arena with blue sky, golden dragon statues, and thousands of cheering spectators",
+            "The wooden deck of a grand pirate galleon ship sailing across sparkling turquoise ocean waves under dramatic sunlit clouds and billowing sails",
+            "A massive packed WWE SmackDown wrestling arena with a brightly lit wrestling ring, blue and red pyrotechnic stage lights, and a roaring stadium crowd",
+            "A vibrant neon-lit Shibuya crossing street at night in Tokyo with glowing purple and cyan digital billboards and dramatic anime energy",
+            "An atmospheric traditional Japanese wooden dojo and bamboo forest at twilight illuminated by warm glowing paper lanterns and floating embers",
+            "A dramatic dark dungeon cavern with a towering glowing crimson-and-violet magic portal gate and swirling shadow mist",
+            "A massive illuminated wall mural behind the MC displaying detailed black-and-white Japanese sumi-e ink manga artwork of dramatic anime warriors and swirling ink clouds",
+            "A colossal packed esports stadium arena behind the MC with a giant curved LED screen displaying a colorful grid of dozens of anime fighter portraits and concert spotlights",
+            "The grand Chunin Exam tournament arena in Konoha with massive stone walls, giant wooden gate, and thousands of cheering shinobi spectators",
             "The iconic Final Valley canyon with two colossal stone ninja statues facing each other across a thundering misty waterfall",
-            "An underground fight club octagon cage surrounded by dramatic warm spotlights, sparks flying in the air, and atmospheric haze",
-            "A sleek modern broadcast studio with acoustic panels, warm amber and cyan RGB LED light bars, and a glowing 'VS BATTLE' neon sign in the background",
-            "A traditional Japanese temple courtyard at night illuminated by glowing paper lanterns, cherry blossom petals, and a giant full moon",
-            "A massive ancient stone colosseum arena under a dramatic fiery sunset sky with swirling dust and epic cinematic lighting"
+            "A sleek modern broadcast studio with acoustic panels, warm amber and cyan RGB LED light bars, and a glowing 'VS BATTLE' neon sign in the background"
         ];
 
         function showToast(msg, type = 'success') {
@@ -343,6 +463,37 @@
                 document.getElementById('mc-arena-desc').value = ARENA_PRESETS[idx];
                 syncPromptWithDialog();
             }
+        }
+
+        function handleCostumeThemeSync() {
+            const autoSync = document.getElementById('auto-sync-arena')?.checked;
+            if (autoSync) {
+                const costumeKey = document.getElementById('mc-costume-select').value;
+                const themeMap = {
+                    rental_ps_hoodie: "0",
+                    rental_ps_jersey: "0",
+                    dragonball_gi: "1",
+                    dragonball_announcer: "1",
+                    onepiece_pirate: "2",
+                    onepiece_captain: "2",
+                    smackdown_champ: "3",
+                    boxing_announcer: "3",
+                    viral_jjk: "4",
+                    viral_dandadan: "4",
+                    viral_demonslayer: "5",
+                    viral_sololeveling: "6",
+                    shinobi_tactical: "7",
+                    naruto_hokage: "9",
+                    naruto_akatsuki: "10",
+                    glamour_woman: "8",
+                    batik_tactical: "11"
+                };
+                if (themeMap[costumeKey] !== undefined) {
+                    document.getElementById('mc-arena-select').value = themeMap[costumeKey];
+                    updateArenaPreviewText();
+                }
+            }
+            syncPromptWithDialog();
         }
 
         function randomizeMcArena() {
@@ -397,65 +548,173 @@
             showToast('Foto referensi wajah MC dihapus.');
         }
 
-        // ==================== DIALOG GENERATOR (INSTANT + AI) ====================
-        function getInstantDialogTemplates(segment, f1, f2) {
+        // ==================== AUTO-SCAN GAMBAR VS BATTLE ====================
+        function handleVsScreenDrop(event) {
+            event.preventDefault();
+            const file = event.dataTransfer?.files?.[0];
+            if (file) processVsScreenFile(file);
+        }
+
+        function handleVsScreenUpload(event) {
+            const file = event.target.files?.[0];
+            if (file) processVsScreenFile(file);
+        }
+
+        function processVsScreenFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                const commaIdx = dataUrl.indexOf(',');
+                const meta = dataUrl.substring(0, commaIdx);
+                vsScreenBase64 = dataUrl.substring(commaIdx + 1);
+                const mimeMatch = meta.match(/data:(.*?);base64/);
+                vsScreenMime = mimeMatch ? mimeMatch[1] : 'image/png';
+
+                const preview = document.getElementById('vs-screen-preview');
+                preview.innerHTML = `<img src="${dataUrl}" class="w-full h-full object-cover" alt="Layar VS Battle">`;
+                preview.classList.add('border-rose-400');
+                document.getElementById('btn-rescan-vs').classList.remove('hidden');
+
+                scanVsBattleImage();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function scanVsBattleImage() {
+            if (!vsScreenBase64) return;
+            const statusEl = document.getElementById('vs-scan-status');
+            const rescanBtn = document.getElementById('btn-rescan-vs');
+            const f1Input = document.getElementById('fighter-1');
+            const f2Input = document.getElementById('fighter-2');
+
+            statusEl.innerHTML = `<span class="text-amber-400 font-semibold animate-pulse">🔍 AI membaca nama petarung...</span>`;
+            rescanBtn.disabled = true;
+
+            const prompt = `Analyze this fighting game VS screen / battle matchup image. Read the character names written on the left side (1P / Player 1) and right side (COM / Player 2), or identify the two characters visually if no text is displayed. Return ONLY a JSON object with exact keys "fighter1" (left character name) and "fighter2" (right character name).`;
+
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [
+                        { text: prompt },
+                        { inlineData: { mimeType: vsScreenMime || "image/png", data: vsScreenBase64 } }
+                    ]
+                }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            fighter1: { type: "STRING" },
+                            fighter2: { type: "STRING" }
+                        },
+                        required: ["fighter1", "fighter2"]
+                    }
+                }
+            };
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+                const data = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }, 3);
+
+                const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
+                if (parsed.fighter1) f1Input.value = parsed.fighter1.trim();
+                if (parsed.fighter2) f2Input.value = parsed.fighter2.trim();
+
+                statusEl.innerHTML = `<span class="text-emerald-400 font-bold">✓ ${f1Input.value} vs ${f2Input.value}</span>`;
+                generateDialogPresets();
+                showToast(`Terdeteksi: ${f1Input.value} vs ${f2Input.value}! Dialog otomatis diperbarui.`);
+            } catch (err) {
+                console.error(err);
+                statusEl.innerHTML = `<span class="text-rose-400">Gagal scan otomatis, silakan edit manual.</span>`;
+                showToast('Gagal membaca nama dari gambar VS.', 'error');
+            } finally {
+                rescanBtn.disabled = false;
+            }
+        }
+
+        // ==================== DIALOG GENERATOR & TTS PREVIEW ====================
+        function getInstantDialogTemplates(segment, tone, f1, f2) {
+            if (tone === 'esports_pro') {
+                if (segment === 'opening') {
+                    return [
+                        { tag: "Shoutcaster Opening 1", text: `Selamat datang di panggung utama! Pertandingan panas antara ${f1} menghadapi ${f2} resmi dimulai sekarang!` },
+                        { tag: "Shoutcaster Opening 2", text: `Dua kandidat juara sudah berada di arena! ${f1} melawan ${f2}, mari kita saksikan duel berkelas dunia!` },
+                        { tag: "Opening Singkat Tegas", text: `Babak penentuan antara ${f1} versus ${f2}, dimulai!` }
+                    ];
+                } else if (segment === 'hype') {
+                    return [
+                        { tag: "Analisis Cepat", text: `Serangan balik yang luar biasa! ${f1} dan ${f2} menunjukkan mekanik tingkat tinggi di ronde ini!` },
+                        { tag: "Momen Kritis", text: `Darah keduanya sudah menipis! Satu kombo lagi dari ${f1} atau ${f2} akan menentukan segalanya!` },
+                        { tag: "Hype Arena", text: `Penonton bergemuruh! Tidak ada yang mau mundur selangkah pun antara ${f1} dan ${f2}!` }
+                    ];
+                } else {
+                    return [
+                        { tag: "Closing Broadcast", text: `Pertandingan yang sangat spektakuler antara ${f1} melawan ${f2}! Jangan lupa subscribe dan nantikan laga berikutnya!` },
+                        { tag: "Interaksi Komunitas", text: `Bagaimana penilaian kalian tentang performa ${f1} dan ${f2} hari ini? Tulis analisis kalian di kolom komentar!` },
+                        { tag: "Closing Singkat", text: `Terima kasih sudah menyaksikan duel ${f1} versus ${f2}! Sampai jumpa di arena selanjutnya!` }
+                    ];
+                }
+            }
+
+            if (tone === 'epic_drama') {
+                if (segment === 'opening') {
+                    return [
+                        { tag: "Narasi Epik 1", text: `Takdir mempertemukan dua petarung legendaris! ${f1} melawan ${f2}! Pertarungan kehormatan dimulai!` },
+                        { tag: "Narasi Epik 2", text: `Langit arena bergemuruh menyambut duel akbar antara ${f1} dan ${f2}! Siapakah yang akan berdiri terakhir?` },
+                        { tag: "Opening Klasik", text: `Ini dia! Pertarungan hidup dan mati antara ${f1} versus ${f2}, dimulai!` }
+                    ];
+                } else if (segment === 'hype') {
+                    return [
+                        { tag: "Benturan Kekuatan", text: `Kekuatan mereka mengguncang seluruh arena! ${f1} dan ${f2} mengeluarkan jurus terlarang mereka!` },
+                        { tag: "Tekad Membara", text: `Luka tidak menghentikan langkah mereka! ${f1} dan ${f2} bertarung sampai titik darah penghabisan!` },
+                        { tag: "Puncak Pertarungan", text: `Inilah klimaks yang kita tunggu! Siapa yang akan tumbang di bawah serangan pamungkas ini?` }
+                    ];
+                } else {
+                    return [
+                        { tag: "Closing Legendaris", text: `Sejarah baru telah tercipta dalam duel ${f1} melawan ${f2}! Ikuti terus kisah pertarungan epik berikutnya!` },
+                        { tag: "Tanya Penonton Epik", text: `Pertarungan yang menggugah jiwa! Siapa petarung favorit kalian antara ${f1} dan ${f2}? Suarakan di komentar!` },
+                        { tag: "Penutup Arena", text: `Arena kembali tenang setelah badai pertarungan ${f1} versus ${f2}. Sampai berjumpa di pertempuran selanjutnya!` }
+                    ];
+                }
+            }
+
+            // Default: gaul_viral
             if (segment === 'opening') {
                 return [
-                    {
-                        tag: "Gaya Video 1 (Tegas & Hype)",
-                        text: `Ini dia! Pertarungan antara ${f1} versus ${f2}, dimulai!`
-                    },
-                    {
-                        tag: "Gaya Video 2 (Host Heboh)",
-                        text: `Halo bosq! Battle paling panas resmi dimulai! Dua petarung terkuat, ${f1} melawan ${f2}, siap saling bantai! Siapa pemenangnya? Mari kita lihat!`
-                    },
-                    {
-                        tag: "Gaya Turnamen Epik",
-                        text: `Selamat datang di arena! Di sudut kiri ada ${f1}, dan di sudut kanan siap menghadang ${f2}! Tanpa basa-basi lagi, saksikan pertarungan sengit mereka sekarang!`
-                    }
+                    { tag: "Gaya Rental PS Viral", text: `Woy bosq merapat! Duel paling pecah hari ini, ${f1} lawan ${f2}, stik udah panas, gaspol dimulai!` },
+                    { tag: "Gaya Host Heboh", text: `Halo bosq! Battle paling panas resmi dimulai! Dua jagoan terkuat, ${f1} melawan ${f2}, siap saling bantai! Siapa pemenangnya?` },
+                    { tag: "Opening Tegas & Singkat", text: `Ini dia bosq! Pertarungan antara ${f1} versus ${f2}, dimulai!` }
                 ];
             } else if (segment === 'hype') {
                 return [
-                    {
-                        tag: "Komentar Pecah",
-                        text: `Waduh gila banget serangan barusan! ${f1} dan ${f2} sama-sama gak mau ngalah bosq! Menurut kalian siapa yang bakal tumbang duluan?`
-                    },
-                    {
-                        tag: "Ketegangan Puncak",
-                        text: `Makin panas bosq! Jurus andalan mulai dikeluarkan, duel antara ${f1} lawan ${f2} benar-benar di luar dugaan!`
-                    },
-                    {
-                        tag: "Shoutcaster Cepat",
-                        text: `Luar biasa! Refleks yang sangat cepat! Apakah ${f2} mampu membalikkan keadaan melawan ${f1}? Kita saksikan terus!`
-                    }
+                    { tag: "Komentar Pecah", text: `Waduh gila banget kombonya bosq! ${f1} dan ${f2} sama-sama gak mau ngalah! Siapa nih yang bakal kena mental duluan?` },
+                    { tag: "Ketegangan Puncak", text: `Makin panas bosq! Jurus pamungkas mulai keluar, duel antara ${f1} lawan ${f2} bener-bener di luar nalar!` },
+                    { tag: "Hype Rental PS", text: `Anjay! Refleks dewa bosq! Apakah ${f2} sanggup nge-comeback serangan ${f1}? Kita lihat bareng!` }
                 ];
             } else {
                 return [
-                    {
-                        tag: "Gaya Video 3 (Tanya Penonton)",
-                        text: `Gimana menurut kalian aksi dari ${f1} dan ${f2} tadi, bosq? Pecah banget kan! Aksi mereka benar-benar luar biasa! Tulis jagoan kalian di komentar!`
-                    },
-                    {
-                        tag: "Gaya Video 4 (Closing & CTA)",
-                        text: `Kalau kalian suka konten battle seperti ini, yuk dukung terus channel ini dengan follow dan bagikan! Sampai jumpa di episode berikutnya!`
-                    },
-                    {
-                        tag: "Closing Singkat Padat",
-                        text: `Pertarungan yang luar biasa antara ${f1} versus ${f2}! Jangan lupa like, follow, dan request duel berikutnya di kolom komentar ya bosq!`
-                    }
+                    { tag: "Closing Tanya Jagoan", text: `Gimana menurut kalian aksi dari ${f1} dan ${f2} tadi, bosq? Pecah banget kan! Tulis jagoan kalian di kolom komentar!` },
+                    { tag: "Closing Ajak Follow", text: `Kalau kalian suka konten battle seru kayak gini, yuk gas follow dan share ya bosq! Sampai ketemu di duel berikutnya!` },
+                    { tag: "Closing Request Duel", text: `Gokil abis pertarungan ${f1} versus ${f2} barusan! Next mau diadu siapa lagi nih bosq? Komen di bawah!` }
                 ];
             }
         }
 
         function generateDialogPresets() {
             const segment = document.getElementById('mc-segment-select').value;
+            const tone = document.getElementById('mc-tone-select').value;
             const f1 = document.getElementById('fighter-1').value.trim() || "Petarung 1";
             const f2 = document.getElementById('fighter-2').value.trim() || "Petarung 2";
 
             const badge = document.getElementById('active-segment-badge');
             badge.textContent = `Segmen: ${segment.toUpperCase()}`;
 
-            currentDialogList = getInstantDialogTemplates(segment, f1, f2);
+            currentDialogList = getInstantDialogTemplates(segment, tone, f1, f2);
             selectedDialogIndex = 0;
             renderDialogCards();
         }
@@ -484,6 +743,26 @@
             showToast('Naskah dialog MC dipilih!');
         }
 
+        function previewMcVoice() {
+            const text = document.getElementById('selected-dialog-input').value.trim();
+            if (!text) {
+                showToast('Tulis atau pilih naskah dialog terlebih dahulu!', 'error');
+                return;
+            }
+            if (!('speechSynthesis' in window)) {
+                showToast('Browser tidak mendukung pratinjau suara langsung.', 'error');
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'id-ID';
+            utter.rate = 1.12;
+            const costumeKey = document.getElementById('mc-costume-select').value;
+            utter.pitch = costumeKey === 'glamour_woman' ? 1.25 : 0.95;
+            window.speechSynthesis.speak(utter);
+            showToast('Memutar pratinjau suara intonasi MC...');
+        }
+
         async function fetchWithRetry(url, options, maxRetries = 4) {
             let delay = 1000;
             for (let i = 0; i < maxRetries; i++) {
@@ -502,6 +781,7 @@
         async function generateAiDialogs() {
             const btn = document.getElementById('btn-ai-dialogs');
             const segment = document.getElementById('mc-segment-select').value;
+            const tone = document.getElementById('mc-tone-select').value;
             const f1 = document.getElementById('fighter-1').value.trim() || "Petarung 1";
             const f2 = document.getElementById('fighter-2').value.trim() || "Petarung 2";
 
@@ -509,7 +789,11 @@
             btn.classList.add('opacity-50');
             showToast('AI sedang meracik 3 variasi dialog MC baru...');
 
-            const prompt = `Buatkan 3 variasi naskah dialog MC / Host turnamen game anime Bahasa Indonesia yang sangat ekspresif, heboh, natural, dan cocok untuk video pendek Reels/Shorts (durasi 8 detik).
+            const toneDesc = tone === 'gaul_viral'
+                ? "gaul viral Indonesia ala anak rental PS / kreator TikTok (pakai sapaan 'bosq', 'pecah banget', 'gaspol')"
+                : (tone === 'esports_pro' ? "shoutcaster turnamen esports profesional yang cepat dan antusias" : "narator turnamen anime epik yang dramatis dan berwibawa");
+
+            const prompt = `Buatkan 3 variasi naskah dialog MC / Host turnamen game anime Bahasa Indonesia dengan gaya ${toneDesc} untuk video pendek Reels/Shorts (durasi 8 detik).
             Segmen: ${segment.toUpperCase()} (${segment === 'opening' ? 'pembukaan pertandingan menyebut nama petarung' : segment === 'hype' ? 'komentar seru di tengah pertarungan' : 'penutup setelah battle selesai, tanya pendapat penonton & ajak follow/share'}).
             Petarung 1: ${f1}. Petarung 2: ${f2}.
             Setiap dialog maksimal 22 kata agar pas diucapkan dalam 6-8 detik.`;
@@ -717,21 +1001,28 @@
 
         function resetStudio() {
             clearMcFace();
+            vsScreenBase64 = null;
+            vsScreenMime = null;
+            document.getElementById('vs-screen-input').value = '';
+            document.getElementById('vs-screen-preview').innerHTML = `
+                <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-[8px] text-zinc-400">Layar VS</span>
+            `;
+            document.getElementById('vs-scan-status').textContent = 'Tarik/upload screenshot VS untuk deteksi nama otomatis.';
+            document.getElementById('btn-rescan-vs').classList.add('hidden');
             latestMcImageDataUrl = null;
-            document.getElementById('fighter-1').value = "Choji Akimichi";
-            document.getElementById('fighter-2').value = "Shikamaru Nara";
+            document.getElementById('mc-costume-select').value = "rental_ps_hoodie";
+            document.getElementById('fighter-1').value = "Shikamaru Nara";
+            document.getElementById('fighter-2').value = "Choji Akimichi";
             document.getElementById('mc-segment-select').value = "opening";
+            document.getElementById('mc-tone-select').value = "gaul_viral";
             document.getElementById('mc-arena-select').value = "0";
             updateArenaPreviewText();
             generateDialogPresets();
-            document.getElementById('mc-image-box').innerHTML = `<div class="space-y-2"><p class="text-xs text-zinc-400">Klik tombol <span class="text-amber-400 font-bold">"GENERATE FOTO MC & PROMPT VIDEO"</span> untuk merender host MC di arena pilihan Anda.</p></div>`;
+            document.getElementById('mc-image-box').innerHTML = `<div class="space-y-2"><p class="text-xs text-zinc-400">Klik tombol <span class="text-amber-400 font-bold">"GENERATE FOTO MC &amp; PROMPT VIDEO"</span> untuk merender host MC di arena pilihan Anda.</p></div>`;
             showToast('Studio MC berhasil direset!');
         }
 
-        // Inisialisasi saat halaman dimuat
-        document.getElementById('mc-costume-select').addEventListener('change', syncPromptWithDialog);
-        document.getElementById('mc-aspect-ratio').addEventListener('change', syncPromptWithDialog);
-        document.getElementById('mc-arena-desc').addEventListener('input', syncPromptWithDialog);
         window.addEventListener('DOMContentLoaded', () => {
             generateDialogPresets();
         });
